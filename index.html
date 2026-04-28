@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Our Memory Map ❤️</title>
+
+<!-- Leaflet Map Library -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff0f5;
+}
+
+header {
+    text-align: center;
+    padding: 15px;
+    background: #ff4d6d;
+    color: white;
+}
+
+#map {
+    height: 70vh;
+    width: 100%;
+}
+
+.timeline {
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+button {
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #ff4d6d;
+    color: white;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>❤️ Our Memory Map</h1>
+    <p>Every pin is a piece of us</p>
+
+    <!-- Music -->
+    <button onclick="playMusic(love-is)">🎵 Start Our Memory Journey</button>
+</header>
+
+<!love-is.m4a>
+<audio id="bgmusic" autoplay loop muted>
+    <source src="love-is.m4a" type="audio/mp4">
+</audio>
+
+<div id="map"></div>
+
+<div class="timeline">
+    <h2>📍 Our Timeline</h2>
+
+    <div class="card">
+        <b>1. SM City Cauayan</b><br>
+        First meet → Photobooth & Bonchon 🍗📸
+    </div>
+
+    <div class="card">
+        <b>2. Mag’s Cafe</b><br>
+        3 hours of talking, just us ☕💬
+    </div>
+
+    <div class="card">
+        <b>3. Sijarou + Church</b><br>
+        Food, then peaceful moment at Our Lady of Pilar Church 🙏
+    </div>
+
+    <div class="card">
+        <b>4. Green Mustard + Valentine’s Day</b><br>
+        Flowers + you sending me home + meeting my family 🌹🏠
+    </div>
+
+    <div class="card">
+        <b>5. Tuguegarao</b><br>
+        You visiting me always → I said YES to forever ❤️
+    </div>
+</div>
+
+<script>
+document.addEventListener("click", function startOnce() {
+    const music = document.getElementById("love-is");
+    music.play();
+    document.removeEventListener("click", startOnce);
+});
+
+// Initialize Map (Centered in Isabela area)
+var map = L.map('map').setView([16.9, 121.8], 10);
+
+// Map tiles
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'OpenStreetMap'
+}).addTo(map);
+
+// MARKERS + MEMORIES
+
+// 1 SM City Cauayan
+L.marker([16.9345, 121.7645]).addTo(map)
+.bindPopup(`
+<b>SM City Cauayan</b><br>
+Our first meet ❤️<br>
+Photobooth + Bonchon 🍗📸<br>
+<i>It was simple, but something about that day felt different.That's where "us" quietly started.</i>
+`);
+
+// 2 Mag's Cafe
+L.marker([16.9290, 121.7600]).addTo(map)
+.bindPopup(`
+<b>Mag's Cafe</b><br>
+3 hours of talking ☕<br>
+Just enjoying each other’s company<br>
+<i>I didn’t realize time was passing. I just didn't want the moment to end</i>
+`);
+
+// 3 Sijarou + Church
+L.marker([16.9250, 121.7550]).addTo(map)
+.bindPopup(`
+<b>Sijarou + Our Lady of Pilar Church</b><br>
+Food first 🍽️ then peace 🙏<br>
+A calm moment with you<br>
+<i>It felt peaceful...like everything was falling into place. Being with you felt right.</i>
+`);
+
+// 4 Green Mustard + Sinippil
+L.marker([16.8830, 121.6120]).addTo(map)
+.bindPopup(`
+<b>Green Mustard (Valentine’s Day)</b><br>
+You gave me flowers 🌹<br>
+Hinatid mo ako sa bahay<br>
+Met my family 🏠<br>
+<i>A day I’ll never forget</i>
+`);
+
+// 5 Tuguegarao
+L.marker([17.6131, 121.7269]).addTo(map)
+.bindPopup(`
+<b>Tuguegarao</b><br>
+You kept visiting me whenever you could🚗<br>
+And there...I finally said YES ❤️<br>
+<i>Not just being your girlfriend, but choosing you, for life.</i>
+`);
+
+window.addEventListener("load", () => {
+    const music = document.getElementById("bgmusic");
+
+    music.play().catch(() => {
+        document.body.addEventListener("click", () => {
+            music.muted = false;
+            music.play();
+        }, { once: true });
+    });
+});
+</script>
+
+</body>
+</html>
